@@ -15,14 +15,6 @@ function updateTime() {
 $(function () {
     $("#daytime").datetimepicker();
 });
-// 集合時間のエラーを解消させる
-// $('#daytime').datetimepicker({
-//     format: 'YYYY-MM-DD',
-//     language: 'ja'
-// }).on('dp.error', function(e) {
-//     $(e.target).val('');
-// });
-
 
 // 入力情報の取得と表示
 $("#button1").click(function () {
