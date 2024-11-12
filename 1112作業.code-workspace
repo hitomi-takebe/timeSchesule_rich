@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../G’s/20241109_js_02_memopad/講義"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "timeSchesule_rich"
+	}
+}

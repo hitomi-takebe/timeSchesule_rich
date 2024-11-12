@@ -15,49 +15,42 @@
     <p>hurry up!</p>
 </header>
 <body>
+    <div class="now">
         <h1>現在時刻</h1>
         <h2 id="time"></h2>
-
-<input id="title" type="text" placeholder="タイトルを入力">
-<textarea id="text" placeholder="本文を入力"></textarea>
-
+    </div>
     <div class="input">
         <h1>入力</h1>
-        <h2>No.</h2>
-        <input id="number" type="text" placeholder="タイトルを入力">1
-        <h1>タイトル</h1>
-        <h2 id="title">ここにタイトルを記載する</h2>
-        <h2>①集合時刻</h2>
-        <input type="text" id="daytime">
-        <h2>②準備＆移動にかかる時間</h2>
+        <h2>①No.<span id="span1"></span></h2>
+        <h2>②タイトル</h2>
+        <input type="text" placeholder="タイトルを入力" id="title">
+        <h2>③集合時刻</h2>
+        <input type="text" placeholder="クリックして選択" id="daytime">
+        <h2>④準備＆移動にかかる時間</h2>
         <input type="number" placeholder="時間" id="pre_hours" min="0" max="23"><span>時間</span>
         <input type="number" placeholder="分" id="pre_mins" min="0" max="59"><span>分</span>
-        <input type="button" id="button1" value="入力">
+        <h2>⑤準備を開始する時間</h2>
+        <p><span id="start_time"></span></p>
+        <input type="button" id="cal_button" value="計算">
+        <input type="button" id="save_button" value="入力">
     </div>
 
-    <div class="inputTime">
-        <h2>入力した値の確認</h2>
-        <p>①集合時刻：<span id="span1"></span></p>
-        <p>②準備＆移動にかかる時間：<span id="span2"></span>時間<span id="span3"></span>分</p>
-    </div>
-
-    <div class=”preTime">
-        <h1>準備を開始する時間</h1>
-        <p><span id="start_time"></span><p>
+    <div class="inputCheck">
+        <h1>入力した値の確認</h1>
+        <p>※過去の内容を記録したものが出てきます。</p>
+        <ul id="list">
+            <!-- ここに追加データが挿入される -->
+        </ul>
+        <p>①No:<span id="span1"></span></p>
+        <p>②タイトル:<span id="span2"></span></p>
+        <p>③集合時刻:<span id="span3"></span></p>
+        <p>④準備＆移動にかかる時間：<span id="span4"></span>時間<span id="span5"></span>分</p>
     </div>
 
     <div class="notice">
         <h1>お知らせ</h1>
         <p>※準備を開始する時間になるとアラームが出ます。</p>
         <h2 id="alarm_text"></h2>
-    </div>
-
-    <div class="inputList">
-        <h1>記録したもの</h1>
-        <p>※過去の内容を記録したものが出てきます。</p>
-        <ul id="list">
-            <!-- ここに追加データが挿入される -->
-        </ul>
     </div>
 
 

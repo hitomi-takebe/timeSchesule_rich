@@ -17,15 +17,15 @@ $(function () {
 });
 
 // 入力情報の取得と表示
-$("#button1").click(function () {
+$("#cal_button").click(function () {
     // テキストボックスのvalue値を取得
     const MtgTime = $("#daytime").val();
     const hours2 = $("#pre_hours").val();
     const minutes2 = $("#pre_mins").val();  
     // spanタグに値を設定
-    $("#span1").text(MtgTime);
-    $("#span2").text(hours2);
-    $("#span3").text(minutes2);      
+    $("#span3").text(MtgTime);
+    $("#span4").text(hours2);
+    $("#span5").text(minutes2);      
 
     console.log("準備・移動の時間をdiffに取得");
     // diffに準備・移動時間の分数を入力

@@ -77,23 +77,23 @@ h1 {
     /* font-family: "Kokoro"; */
 }
 
-.inputTime{
+/* .inputTime{
     width: 30%;
     /* border: dotted 2px; */
-    color: #B7B78A;
+    /* color: #B7B78A;
     margin: 0 auto;
     margin-top: 1em;
     padding: 0.3em;
     border-radius: 10px;
-    background-color: #fff;
-}
+    background-color: #fff; */
+/* } */
 
-.inputTime p{
-    text-align: left;
-}
-.inputTime h2 {
+/* .inputTime p{ */
+    /* text-align: left; */
+/* } */
+/* .inputTime h2 {
     font-weight: bold;
-}
+} */ */
 
 .notice h1 {
     margin-bottom: 0.2em;
