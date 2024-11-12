@@ -18,7 +18,7 @@ $(function () {
 
 // No.の取得(HPを開いた瞬間から表示)
 $(function () {
-    $("#span1").text(localStorage.length);
+    $("#span1").text((localStorage.length)+1);
 });
 
 // 入力情報の取得と表示
@@ -78,7 +78,7 @@ for (let i = 0; i < localStorage.length; i++) {
     const minutes2 = localStorage.getItem(key);
     const html = `
     <li>
-        <p>①No.:${key}</p>
+        <p>①元々のデータNo.:${key}</p>
         <p>②タイトル:${titles}</p>
         <p>③集合時刻:${MtgTime}</p>
         <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
