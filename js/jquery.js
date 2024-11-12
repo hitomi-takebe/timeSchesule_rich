@@ -16,6 +16,11 @@ $(function () {
     $("#daytime").datetimepicker();
 });
 
+// No.の取得(HPを開いた瞬間から表示)
+$(function () {
+    $("#span1").text(localStorage.length);
+});
+
 // 入力情報の取得と表示
 $("#cal_button").click(function () {
     // テキストボックスのvalue値を取得
