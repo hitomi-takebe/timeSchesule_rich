@@ -39,6 +39,32 @@ $("#cal_button").click(function () {
     $("#start_time").text(PlusTime.toLocaleTimeString());
 // }); 
 
+//1.Save クリックイベント
+$("#save_button").on("click", function () {
+// テキストボックスのvalue値を取得
+const key = $("#span1").val();
+const titles = $("#title").val();
+const MtgTime = $("#daytime").val();
+const hours2 = $("#pre_hours").val();
+const minutes2 = $("#pre_mins").val();  
+// spanタグに値を設定
+$("#span3").text(MtgTime);
+$("#span4").text(hours2);
+$("#span5").text(minutes2); 
+
+localStorage.setItem(key,titles,MtgTime,hours2,minutes2);
+const html = `
+<li>
+    <p>①No.:${key}</p>
+    <p>②タイトル:${titles}</p>
+    <p>③集合時刻:${MtgTime}</p>
+    <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
+</li>
+`;
+$("#list").append(html);
+});
+    
+    
 // 出る時間になったことをお知らせする
 // アラームチェックを1秒ごとに行う
 // $(function () {    
