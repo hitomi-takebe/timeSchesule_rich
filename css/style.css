@@ -10,7 +10,6 @@ body{
 }
 
 .header {
-    font-size: 3em;
     font-style: italic;
     letter-spacing: .1em;
     color: #658864;
@@ -20,6 +19,7 @@ body{
 }
 
 .header p{
+    font-size: 3em;
     margin: 30px;
     margin-bottom: 50px;
     position: relative;
