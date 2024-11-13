@@ -1,6 +1,6 @@
 console.log("紐付けチェック");
 
-// 現在時刻を取得
+// 現在時刻の取得関数
 function updateTime() {
     const date = new Date();
     const hours = date.getHours();
@@ -22,25 +22,25 @@ $(function () {
     $("#span1").text((localStorage.length)+1);
 });
 
-// 開始時刻を計算する関数
+// 準備を開始時刻を計算する関数
 function calculateStartTime(){
     // テキストボックスの値を取得
-    const mtgTime = $("#daytime").val();
-    const hours2 = parseInt($("#pre_hours").val(), 10);
-    const minutes2 = parseInt($("#pre_mins").val(), 10);
+    const daytime = $("#daytime").val();
+    const pre_hours = parseInt($("#pre_hours").val(), 10);
+    const pre_mins = parseInt($("#pre_mins").val(), 10);
 
     // spanタグに値を設定
-    $("#span3").text(mtgTime);
-    $("#span4").text(hours2);
-    $("#span5").text(minutes2);
+    $("#span3").text(daytime);
+    $("#span4").text(pre_hours);
+    $("#span5").text(pre_mins);
 
     console.log("準備・移動の時間をdiffに取得");
 
     // 準備・移動時間をミリ秒単位で計算
-    const diff = hours2 * (60 * 60 * 1000) + minutes2 * (60 * 1000);
+    const diff = pre_hours * (60 * 60 * 1000) + pre_mins * (60 * 1000);
     console.log(diff);
     // ミーティング時刻をDateオブジェクトに変換
-    const mtgDate = new Date(mtgTime);
+    const mtgDate = new Date(daytime);
 
     // 準備・移動時間を引いて、開始時刻を計算
     const startTime = new Date(mtgDate.getTime() - diff);
@@ -48,12 +48,12 @@ function calculateStartTime(){
     return startTime;
 }
 
+// 準備を開始する時間をボタンを押した際に表示
 $("#cal_button").click(function () {
-    const start_time = calculateStartTime(); // 現在時刻を取得
+    const startTime = calculateStartTime(); // 準備を開始する時間を取得
     // 結果を表示
-    $("#start_time").text(start_time.toLocaleTimeString());
-    console.log(start_time);
-
+    $("#start_time").text(startTime.toLocaleTimeString());
+    console.log(startTime);
 });
 
 //Save クリックイベント
@@ -61,17 +61,17 @@ $("#save_button").on("click", function () {
     // テキストボックスのvalue値を取得    
     const key = localStorage.length + 1;  //keyの番号を取得
     const titles = $("#title").val();
-    const MtgTime = $("#daytime").val();
-    const hours2 = $("#pre_hours").val();
-    const minutes2 = $("#pre_mins").val();
+    const daytime = $("#daytime").val();
+    const pre_hours = $("#pre_hours").val();
+    const pre_mins = $("#pre_mins").val();
+    const startTime = calculateStartTime(); // 準備を開始する時間を取得
+    // オブジェクトを定義
+    const data = { key1: key, key2: titles, key3: daytime, key4: pre_hours, key5: pre_mins , key6: startTime};
+    // ローカルストレージに情報を格納する
+    localStorage.setItem(key, JSON.stringify(data));
     // span1に次のNoを振り分ける
     $("#span1").text((localStorage.length) + 2);
-    // オブジェクトを定義
-    const data = { key1: key, key2: titles, key3: MtgTime, key4: hours2, key5: minutes2 };
-    // ローカルストレージに情報を格納して表示させる
-    localStorage.setItem(key, JSON.stringify(data));
-
-    // 保存後に表示を更新
+    // 表示を更新
     load();
 
     // 出る時間になったことをお知らせする
@@ -82,19 +82,19 @@ $("#save_button").on("click", function () {
             console.log(current);
             
             // テキストボックスの値を取得
-            const mtgTime = $("#daytime").val();
-            const hours2 = parseInt($("#pre_hours").val(), 10);
-            const minutes2 = parseInt($("#pre_mins").val(), 10);
+            const daytime = $("#daytime").val();
+            const pre_hours = parseInt($("#pre_hours").val(), 10);
+            const pre_mins = parseInt($("#pre_mins").val(), 10);
 
             // spanタグに値を設定
-            $("#span3").text(mtgTime);
-            $("#span4").text(hours2);
-            $("#span5").text(minutes2);
+            $("#span3").text(daytime);
+            $("#span4").text(pre_hours);
+            $("#span5").text(pre_mins);
 
             console.log("準備・移動の時間をdiffに取得");
 
             // calculateStartTime関数を使用して開始時刻を計算
-            const startTime = calculateStartTime(mtgTime, hours2, minutes2);
+            const startTime = calculateStartTime(daytime, pre_hours, pre_mins);
 
             
         
