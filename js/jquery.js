@@ -71,10 +71,21 @@ const html = `
 //3.ページ読み込み：保存データ取得表示
 for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    const titles = localStorage.getItem(key);
-    const MtgTime = localStorage.getItem(key);
-    const hours2 = localStorage.getItem(key);
-    const minutes2 = localStorage.getItem(key);
+    const value = localStorage.getItem(key);
+    const html = `
+    <li>
+    <p>${key}</p>
+    <p>${value}</p>
+    </li>
+`;
+    $("#list").append(html);
+}
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const titles = localStorage.getItem(titles);
+    const MtgTime = localStorage.getItem(MtgTime);
+    const hours2 = localStorage.getItem(hours2);
+    const minutes2 = localStorage.getItem(minutes2);
     const html = `
     <li>
         <p>①No.:${key}</p>
@@ -82,9 +93,9 @@ for (let i = 0; i < localStorage.length; i++) {
         <p>③集合時刻:${MtgTime}</p>
         <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
     </li>
-    `;  
-    $("#list").append(html);
-}
+//     `;  
+//     $("#list").append(html);
+// }
     
 // 出る時間になったことをお知らせする
 // アラームチェックを1秒ごとに行う
