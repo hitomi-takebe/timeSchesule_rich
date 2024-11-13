@@ -139,5 +139,5 @@ $("#clear_button").on("click", function () {
     $("#daytime").val("");
     $("#pre_hours").val("");
     $("#pre_mins").val("");
-    $("#start_time").val("");
+    $("#start_time").text("");
 });
