@@ -70,7 +70,7 @@ $("#save_button").on("click", function () {
     // ローカルストレージに情報を格納する
     localStorage.setItem(key, JSON.stringify(data));
     // span1に次のNoを振り分ける
-    $("#span1").text((localStorage.length) + 2);
+    $("#span1").text((localStorage.length) + 1);
     // 表示を更新
     load();
 
@@ -79,25 +79,7 @@ $("#save_button").on("click", function () {
     $(function () {
         setInterval(function alarm() {
             const current = updateTime(); // 現在時刻を取得
-            console.log(current);
-            
-            // テキストボックスの値を取得
-            const daytime = $("#daytime").val();
-            const pre_hours = parseInt($("#pre_hours").val(), 10);
-            const pre_mins = parseInt($("#pre_mins").val(), 10);
-
-            // spanタグに値を設定
-            $("#span3").text(daytime);
-            $("#span4").text(pre_hours);
-            $("#span5").text(pre_mins);
-
-            console.log("準備・移動の時間をdiffに取得");
-
-            // calculateStartTime関数を使用して開始時刻を計算
-            const startTime = calculateStartTime(daytime, pre_hours, pre_mins);
-
-            
-        
+            const startTime = calculateStartTime(); // 準備を開始する時間を取得
             // 出発時間と現在時刻が一致するか確認
             if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
                 $("#alarm_text").text("準備を開始する時間になりました！");
