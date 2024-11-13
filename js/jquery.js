@@ -22,28 +22,62 @@ $(function () {
     $("#span1").text((localStorage.length)+1);
 });
 
-// 入力情報の取得と表示
+// 開始時刻を計算する関数
+function calculateStartTime(mtgTime, prepHours, prepMinutes) {
+    // 準備・移動時間をミリ秒単位で計算
+    const diff = prepHours * (60 * 60 * 1000) + prepMinutes * (60 * 1000);
+    console.log(diff);
+    // ミーティング時刻をDateオブジェクトに変換
+    const mtgDate = new Date(mtgTime);
+
+    // 準備・移動時間を引いて、開始時刻を計算
+    const startTime = new Date(mtgDate.getTime() - diff);
+
+    return startTime;
+}
+
 $("#cal_button").click(function () {
-    // テキストボックスのvalue値を取得
-    const MtgTime = $("#daytime").val();
-    const hours2 = $("#pre_hours").val();
-    const minutes2 = $("#pre_mins").val();  
+    // テキストボックスの値を取得
+    const mtgTime = $("#daytime").val();
+    const hours2 = parseInt($("#pre_hours").val(), 10);
+    const minutes2 = parseInt($("#pre_mins").val(), 10);
+
     // spanタグに値を設定
-    $("#span3").text(MtgTime);
+    $("#span3").text(mtgTime);
     $("#span4").text(hours2);
-    $("#span5").text(minutes2);      
+    $("#span5").text(minutes2);
 
     console.log("準備・移動の時間をdiffに取得");
-    // diffに準備・移動時間の分数を入力
-    let diff = hours2 * (60 * 60 * 1000) + minutes2 * (60 * 1000);
-    console.log(diff);
-    // 文字列からDateオブジェクトに変換
-    const MtgTime_new = new Date(MtgTime);
-    // diffの時間を追加
-    const PlusTime = new Date(MtgTime_new.getTime() - diff);
+
+    // calculateStartTime関数を使用して開始時刻を計算
+    const startTime = calculateStartTime(mtgTime, hours2, minutes2);
+    
     // 結果を表示
-    $("#start_time").text(PlusTime.toLocaleTimeString());
-}); 
+    $("#start_time").text(startTime.toLocaleTimeString());
+});
+
+// 入力情報の取得と表示
+// $("#cal_button").click(function () {
+//     // テキストボックスのvalue値を取得
+//     const MtgTime = $("#daytime").val();
+//     const hours2 = $("#pre_hours").val();
+//     const minutes2 = $("#pre_mins").val();  
+//     // spanタグに値を設定
+//     $("#span3").text(MtgTime);
+//     $("#span4").text(hours2);
+//     $("#span5").text(minutes2);      
+
+//     console.log("準備・移動の時間をdiffに取得");
+//     // diffに準備・移動時間の分数を入力
+//     let diff = hours2 * (60 * 60 * 1000) + minutes2 * (60 * 1000);
+//     console.log(diff);
+//     // 文字列からDateオブジェクトに変換
+//     const MtgTime_new = new Date(MtgTime);
+//     // diffの時間を追加
+//     const PlusTime = new Date(MtgTime_new.getTime() - diff);
+//     // 結果を表示
+//     $("#start_time").text(PlusTime.toLocaleTimeString());
+// }); 
 
 //Save クリックイベント
 $("#save_button").on("click", function () {
@@ -66,13 +100,31 @@ $("#save_button").on("click", function () {
     // 出る時間になったことをお知らせする
     // アラームチェックを1秒ごとに行う
     $(function () {
-        setInterval(function () {
+        setInterval(function alarm() {
             const current = updateTime(); // 現在時刻を取得
             console.log(current);
+            
+            // テキストボックスの値を取得
+            const mtgTime = $("#daytime").val();
+            const hours2 = parseInt($("#pre_hours").val(), 10);
+            const minutes2 = parseInt($("#pre_mins").val(), 10);
+
+            // spanタグに値を設定
+            $("#span3").text(mtgTime);
+            $("#span4").text(hours2);
+            $("#span5").text(minutes2);
+
+            console.log("準備・移動の時間をdiffに取得");
+
+            // calculateStartTime関数を使用して開始時刻を計算
+            const startTime = calculateStartTime(mtgTime, hours2, minutes2);
+
+            
+        
             // 出発時間と現在時刻が一致するか確認
-            if (current.hour === PlusTime.getHours() && current.minute === PlusTime.getMinutes()) {
+            if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
                 $("#alarm_text").text("準備を開始する時間になりました！");
-                console.log(`現在の時刻が${PlusTime.getHours()}時${PlusTime.getMinutes()}分になりました。`);
+                console.log(`現在の時刻が${startTime.getHours()}時${startTime.getMinutes()}分になりました。`);
             
                 // 一度だけアラームを発動させるため、setIntervalをクリア
                 clearInterval(this);
