@@ -24,29 +24,7 @@ $(function () {
     $("#span1").text((localStorage.length)+1);
 });
 
-// 準備を開始時刻を計算する関数
-function calculateStartTime(){
-    // テキストボックスの値を取得
-    const daytime = $("#daytime").val();
-    const pre_hours = $("#pre_hours").val();
-    const pre_mins = $("#pre_mins").val();
 
-    // spanタグに値を設定
-    $("#span3").text(daytime);
-    $("#span4").text(pre_hours);
-    $("#span5").text(pre_mins);
-
-    console.log("準備・移動の時間をdiffに取得");
-
-    // 準備・移動時間をミリ秒単位で計算
-    const diff = pre_hours * (60 * 60 * 1000) + pre_mins * (60 * 1000);
-    console.log(diff);
-    // ミーティング時刻をDateオブジェクトに変換
-    const mtgDate = new Date(daytime);
-    // 準備・移動時間を引いて、開始時刻を計算
-    const startTime = new Date(mtgDate.getTime() - diff);
-    return startTime
-}
 
 // cal_buttonにて準備を開始する時間を計算して表示
 $("#cal_button").click(function () {
@@ -81,6 +59,29 @@ function endAlarm() {
 console.log("1分経ったので表示が消えます。");
 $("#alarm_text").text("");
 };
+// 準備を開始時刻を計算する関数
+function calculateStartTime(){
+    // テキストボックスの値を取得
+    const daytime = $("#daytime").val();
+    const pre_hours = $("#pre_hours").val();
+    const pre_mins = $("#pre_mins").val();
+
+    // spanタグに値を設定
+    $("#span3").text(daytime);
+    $("#span4").text(pre_hours);
+    $("#span5").text(pre_mins);
+
+    console.log("準備・移動の時間をdiffに取得");
+
+    // 準備・移動時間をミリ秒単位で計算
+    const diff = pre_hours * (60 * 60 * 1000) + pre_mins * (60 * 1000);
+    console.log(diff);
+    // ミーティング時刻をDateオブジェクトに変換
+    const mtgDate = new Date(daytime);
+    // 準備・移動時間を引いて、開始時刻を計算
+    const startTime = new Date(mtgDate.getTime() - diff);
+    return startTime
+}
 
 // 読込関数
 function load() {
@@ -122,6 +123,8 @@ $("#clear_button").on("click", function () {
     $("#pre_mins").val("");
     $("#start_time").text("");
 });
+
+
 
 
 
