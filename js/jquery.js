@@ -45,7 +45,7 @@ $("#cal_button").click(function () {
     $("#start_time").text(PlusTime.toLocaleTimeString());
 }); 
 
-//1.Save クリックイベント
+//Save クリックイベント
 $("#save_button").on("click", function () {
     // テキストボックスのvalue値を取得    
     const key = localStorage.length + 1;  //keyの番号を取得
@@ -84,26 +84,14 @@ $("#save_button").on("click", function () {
     })
 });
 
-    // 読込関数
+// 読込関数
 function load() {
-        // リストをクリア
-        $("#list").empty();
-    
-        // localStorageに保存したデータを取得
-        // const data = JSON.parse(localStorage.getItem("data"));
-
-    //     // localStorageに保存したデータを表示
-    //     $.each(data, (key, value) => {
-    //         const html = $('<li></li>').text(value);
-    //         $("#list").append(html);
-    //     })
-    // };
-
+    // リストをクリア
+    $("#list").empty();
     // localStorageに保存されたすべてのデータを表示
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         const data = JSON.parse(localStorage.getItem(key));
-
         // 表示用のHTMLを生成
         const html = `
             <li>
@@ -122,101 +110,14 @@ $(document).ready(function () {
     load();
 });
     
-// const html = `
-// <li>
-//     <p>①No.:${key}</p>
-//     <p>②タイトル:${titles}</p>
-//     <p>③集合時刻:${MtgTime}</p>
-//     <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
-// </li>
-// `;
-//     $("#list").append(html);
-// }); 
-    
-// //3.ページ読み込み：保存データ取得表示
-// for (let i = 0; i < localStorage.length; i++) {
-//     const key = localStorage.key(i);
-//     const value = localStorage.getItem(key);
-//     const html = `
-//     <li>
-//     <p>${key}</p>
-//     <p>${value}</p>
-//     </li>
-// `;
-//     $("#list").append(html);
-// }
-// for (let i = 0; i < localStorage.length; i++) {
-//     const key = localStorage.key(i);
-//     const titles = localStorage.getItem(titles);
-//     const MtgTime = localStorage.getItem(MtgTime);
-//     const hours2 = localStorage.getItem(hours2);
-//     const minutes2 = localStorage.getItem(minutes2);
-//     const html = `
-//     <li>
-//         <p>①No.:${key}</p>
-//         <p>②タイトル:${titles}</p>
-//         <p>③集合時刻:${MtgTime}</p>
-//         <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
-//     </li>
-//     `;  
-//     $("#list").append(html);
-// }
-    
-
-
-
-
 // アラームメッセージを非表示にする関数
 function endAlarm() {
     console.log("1分経ったので表示が消えます。");
     $("#alarm_text").text("");
     };
 
-
-
-
-
-    // 30%と50%のセールチェックを呼び出す
-    // function sale() {
-    //     sale30();
-    //     sale50();
-    // }
-
-    // // 30%セール機能
-    // function sale30() {
-    //     const currentTime = updateTime();
-    //     const sale_hour = 15; // 時
-    //     const sale_minute = 0; // 分
-
-    //     if (currentTime.hour === sale_hour && currentTime.minute === sale_minute) {
-    //         $("#sale_text").text("特売になります！！！！！！！");
-    //         $("#sale").text("30%引き");
-    //     }
-    // }
-
-    // // 50%セール機能
-    // function sale50() {
-    //     const currentTime = updateTime();
-    //     const sale_hour = 19; // 時
-    //     const sale_minute = 0; // 分
-
-    //     if (currentTime.hour === sale_hour && currentTime.minute === sale_minute) {
-    //         $("#sale_text").text("特売になります！！！！！！！");
-    //         $("#sale").text("50%引き");
-    //         setTimeout(endSale, 30000); // 30秒後にセール表示を消す
-    //     }
-    // }
-
-    // // セール表示を非表示にする
-    // function endSale() {
-    //     console.log("表示が消えます。");
-    //     $("#sale_text").text("");
-    //     $("#sale").text("");
-    // }
-
-    // 1秒ごとに各機能を実行
-    //ここを後で表示させる
-    setInterval(updateTime, 1000);
+// 1秒ごとに各機能を実行
+setInterval(updateTime, 1000);
  // 現在時刻の更新
 // setInterval(alarm, 1000);      /// アラームのチェック
 // setInterval(sale, 1000);       // セールのチェック
