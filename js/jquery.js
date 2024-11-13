@@ -75,25 +75,6 @@ $("#save_button").on("click", function () {
     load();
 });
 
-// 出る時間になったことをお知らせする
-$(function () {
-    // 出発時間（準備を開始する時間）を1度計算
-    const startTime = calculateStartTime(); // 出発時刻を取得
-    const current = updateTime(); // 現在時刻を取得
-
-    // アラームを1秒ごとにチェック
-    const alarmInterval = setInterval(function alarm() {
-        // 出発時間と現在時刻が一致するか確認
-        if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
-            $("#alarm_text").text("準備を開始する時間になりました！");
-            console.log(`現在の時刻が${startTime.getHours()}時${startTime.getMinutes()}分になりました。`);
-            // アラームを1度だけ発動させるため、setIntervalをクリア
-            clearInterval(alarmInterval);
-            // 1分後にアラームメッセージを消す
-            setTimeout(endAlarm, 60000);
-        }
-    }, 1000);
-});
 
 // アラームメッセージを非表示にする関数
 function endAlarm() {
@@ -141,3 +122,26 @@ $("#clear_button").on("click", function () {
     $("#pre_mins").val("");
     $("#start_time").text("");
 });
+
+
+
+// ここから先は要修正
+// 出る時間になったことをお知らせする
+// $(function () {
+//     // 出発時間（準備を開始する時間）を1度計算
+//     const startTime = calculateStartTime(); // 出発時刻を取得
+//     const current = updateTime(); // 現在時刻を取得
+
+//     // アラームを1秒ごとにチェック
+//     const alarmInterval = setInterval(function alarm() {
+//         // 出発時間と現在時刻が一致するか確認
+//         if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
+//             $("#alarm_text").text("準備を開始する時間になりました！");
+//             console.log(`現在の時刻が${startTime.getHours()}時${startTime.getMinutes()}分になりました。`);
+//             // アラームを1度だけ発動させるため、setIntervalをクリア
+//             clearInterval(alarmInterval);
+//             // 1分後にアラームメッセージを消す
+//             setTimeout(endAlarm, 60000);
+//         }
+//     }, 1000);
+// });
