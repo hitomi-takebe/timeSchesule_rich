@@ -42,12 +42,12 @@ $("#cal_button").click(function () {
     const PlusTime = new Date(MtgTime_new.getTime() - diff);
     // 結果を表示
     $("#start_time").text(PlusTime.toLocaleTimeString());
-// }); 
+}); 
 
 //1.Save クリックイベント
 $("#save_button").on("click", function () {
 // テキストボックスのvalue値を取得    
-const key = localStorage.length;  //keyの番号を取得
+const key = localStorage.length+1;  //keyの番号を取得
 const titles = $("#title").val();
 const MtgTime = $("#daytime").val();
 const hours2 = $("#pre_hours").val();
@@ -89,7 +89,7 @@ for (let i = 0; i < localStorage.length; i++) {
     
 // 出る時間になったことをお知らせする
 // アラームチェックを1秒ごとに行う
-// $(function () {    
+$(function () {    
     setInterval(function () {
         const current = updateTime(); // 現在時刻を取得
         console.log(current);

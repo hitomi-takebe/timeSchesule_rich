@@ -100,12 +100,16 @@ h1 {
 }
 .notice p,.inputCheck p{
     font-size: 0.5em;
-    color: #658864;
-    
+    color: #658864; 
 }
 
 .notice h2 {
     margin-top: 1em;
     font-size: 2em;
     color: #658864;
+}
+
+#list li {
+    font-size: 1em;
+    color: black;
 }
