@@ -1,5 +1,6 @@
 console.log("現在時刻を表示");
-// 現在時刻を表示する関数
+
+// 現在時刻を表示
 function updateTime() {
     const date = new Date();
     const hours = date.getHours();
@@ -11,12 +12,12 @@ function updateTime() {
     return { hour: hours, minute: minutes, second: seconds };
 }
 
-// 集合時間の取得
+// 集合時刻の入力をdatetimepickerを使って行う
 $(function () {
     $("#daytime").datetimepicker();
 });
 
-// No.の取得(HPを開いた瞬間から表示)
+// No.の取得(ローカルストレージの数を表示)
 $(function () {
     $("#span1").text((localStorage.length)+1);
 });
@@ -52,11 +53,9 @@ const titles = $("#title").val();
 const MtgTime = $("#daytime").val();
 const hours2 = $("#pre_hours").val();
 const minutes2 = $("#pre_mins").val();  
-// spanタグに値を設定
-$("#span3").text(MtgTime);
-$("#span4").text(hours2);
-$("#span5").text(minutes2); 
-
+// span1に次のNoを振り分ける
+$("#span1").text((localStorage.length) + 2);
+// ローカルストレージに情報を格納して表示させる
 localStorage.setItem(key,titles,MtgTime,hours2,minutes2);
 const html = `
 <li>
@@ -78,7 +77,7 @@ for (let i = 0; i < localStorage.length; i++) {
     const minutes2 = localStorage.getItem(key);
     const html = `
     <li>
-        <p>①元々のデータNo.:${key}</p>
+        <p>①No.:${key}</p>
         <p>②タイトル:${titles}</p>
         <p>③集合時刻:${MtgTime}</p>
         <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>

@@ -77,39 +77,20 @@ h1 {
     /* font-family: "Kokoro"; */
 }
 
-/* .inputTime{
-    width: 30%;
-    /* border: dotted 2px; */
-    /* color: #B7B78A;
-    margin: 0 auto;
-    margin-top: 1em;
-    padding: 0.3em;
-    border-radius: 10px;
-    background-color: #fff; */
-/* } */
-
-/* .inputTime p{ */
-    /* text-align: left; */
-/* } */
-/* .inputTime h2 {
-    font-weight: bold;
-} */ */
-
-.notice h1 {
+/* タイトルと注記までのマージンを縮小 */
+.inputCheck h1,.notice h1 {
     margin-bottom: 0.2em;
 }
-.notice p,.inputCheck p{
+
+.green_note {
     font-size: 0.5em;
-    color: #658864; 
+    color: #658864;
+    margin-bottom: 2em;
 }
 
+/* お知らせ文 */
 .notice h2 {
     margin-top: 1em;
     font-size: 2em;
     color: #658864;
-}
-
-#list li {
-    font-size: 1em;
-    color: black;
 }
