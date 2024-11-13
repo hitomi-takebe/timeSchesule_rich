@@ -47,25 +47,41 @@ $("#cal_button").click(function () {
 
 //1.Save クリックイベント
 $("#save_button").on("click", function () {
-// テキストボックスのvalue値を取得    
-const key = localStorage.length+1;  //keyの番号を取得
-const titles = $("#title").val();
-const MtgTime = $("#daytime").val();
-const hours2 = $("#pre_hours").val();
-const minutes2 = $("#pre_mins").val();  
-// span1に次のNoを振り分ける
-$("#span1").text((localStorage.length) + 2);
-// ローカルストレージに情報を格納して表示させる
-localStorage.setItem(key,titles,MtgTime,hours2,minutes2);
-const html = `
-<li>
-    <p>①No.:${key}</p>
-    <p>②タイトル:${titles}</p>
-    <p>③集合時刻:${MtgTime}</p>
-    <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
-</li>
-`;
-    $("#list").append(html);
+    // テキストボックスのvalue値を取得    
+    const key = localStorage.length+1;  //keyの番号を取得
+    const titles = $("#title").val();
+    const MtgTime = $("#daytime").val();
+    const hours2 = $("#pre_hours").val();
+    const minutes2 = $("#pre_mins").val();  
+    // span1に次のNoを振り分ける
+    $("#span1").text((localStorage.length) + 2);
+    // オブジェクトを定義
+    const data = { key1: key, key2: titles, key3: MtgTime,key4: hours2, key5: minutes2};
+    // ローカルストレージに情報を格納して表示させる
+    localStorage.setItem("data", JSON.stringify(data));
+
+    // 読込
+    function load() {
+        const display = $("#list");
+        // localStorageに保存したデータを取得
+        const data = JSON.parse(localStorage.getItem("data"));
+
+        // localStorageに保存したデータを表示
+        $.each(data, (key, value) => {
+            const displayChild = $('<li></li>').text(value);
+            display.append(displayChild);
+        })
+    };
+    
+// const html = `
+// <li>
+//     <p>①No.:${key}</p>
+//     <p>②タイトル:${titles}</p>
+//     <p>③集合時刻:${MtgTime}</p>
+//     <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
+// </li>
+// `;
+//     $("#list").append(html);
 }); 
     
 //3.ページ読み込み：保存データ取得表示
@@ -93,7 +109,7 @@ for (let i = 0; i < localStorage.length; i++) {
         <p>③集合時刻:${MtgTime}</p>
         <p>④準備＆移動にかかる時間：${hours2}時間${minutes2}分</p>
     </li>
-//     `;  
+    `;  
 //     $("#list").append(html);
 // }
     
@@ -123,7 +139,7 @@ $(function () {
 function endAlarm() {
     console.log("1分経ったので表示が消えます。");
     $("#alarm_text").text("");
-}
+    };
 
 
 
