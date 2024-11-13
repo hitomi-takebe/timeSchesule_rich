@@ -11,6 +11,8 @@ function updateTime() {
     // 時間データをオブジェクトとして返す
     return { hour: hours, minute: minutes, second: seconds };
 }
+// 1秒ごとに実行
+setInterval(updateTime, 1000);
 
 // 集合時刻の入力をdatetimepickerを使って行う
 $(function () {
@@ -126,6 +128,16 @@ $(document).ready(function () {
     load();
 });
 
-
-// 1秒ごとに各機能を実行
-setInterval(updateTime, 1000);
+    //2.clear クリックイベント
+$("#clear_button").on("click", function () {
+    // ローカルストレージの内容を削除
+    localStorage.clear();
+    $("#list").empty();
+    // 「入力」の情報をリセット
+    $("#span1").text("1");
+    $("#title").val("");
+    $("#daytime").val("");
+    $("#pre_hours").val("");
+    $("#pre_mins").val("");
+    $("#start_time").val("");
+});
