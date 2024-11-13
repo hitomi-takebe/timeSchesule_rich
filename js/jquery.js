@@ -26,8 +26,8 @@ $(function () {
 function calculateStartTime(){
     // テキストボックスの値を取得
     const daytime = $("#daytime").val();
-    const pre_hours = parseInt($("#pre_hours").val(), 10);
-    const pre_mins = parseInt($("#pre_mins").val(), 10);
+    const pre_hours = $("#pre_hours").val();
+    const pre_mins = $("#pre_mins").val();
 
     // spanタグに値を設定
     $("#span3").text(daytime);
@@ -41,22 +41,20 @@ function calculateStartTime(){
     console.log(diff);
     // ミーティング時刻をDateオブジェクトに変換
     const mtgDate = new Date(daytime);
-
     // 準備・移動時間を引いて、開始時刻を計算
     const startTime = new Date(mtgDate.getTime() - diff);
-
-    return startTime;
+    return startTime
 }
 
-// 準備を開始する時間をボタンを押した際に表示
+// cal_buttonにて準備を開始する時間を計算して表示
 $("#cal_button").click(function () {
     const startTime = calculateStartTime(); // 準備を開始する時間を取得
     // 結果を表示
-    $("#start_time").text(startTime.toLocaleTimeString());
+    $("#start_time").text(startTime.toLocaleString());
     console.log(startTime);
 });
 
-//Save クリックイベント
+//save_button クリックイベント
 $("#save_button").on("click", function () {
     // テキストボックスのvalue値を取得    
     const key = localStorage.length + 1;  //keyの番号を取得
@@ -64,7 +62,7 @@ $("#save_button").on("click", function () {
     const daytime = $("#daytime").val();
     const pre_hours = $("#pre_hours").val();
     const pre_mins = $("#pre_mins").val();
-    const startTime = calculateStartTime(); // 準備を開始する時間を取得
+    const startTime = (calculateStartTime()).toLocaleString(); // 準備を開始する時間を取得、表示形式も同時に変更
     // オブジェクトを定義
     const data = { key1: key, key2: titles, key3: daytime, key4: pre_hours, key5: pre_mins , key6: startTime};
     // ローカルストレージに情報を格納する
@@ -73,27 +71,33 @@ $("#save_button").on("click", function () {
     $("#span1").text((localStorage.length) + 1);
     // 表示を更新
     load();
-
-    // 出る時間になったことをお知らせする
-    // アラームチェックを1秒ごとに行う
-    $(function () {
-        setInterval(function alarm() {
-            const current = updateTime(); // 現在時刻を取得
-            const startTime = calculateStartTime(); // 準備を開始する時間を取得
-            // 出発時間と現在時刻が一致するか確認
-            if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
-                $("#alarm_text").text("準備を開始する時間になりました！");
-                console.log(`現在の時刻が${startTime.getHours()}時${startTime.getMinutes()}分になりました。`);
-            
-                // 一度だけアラームを発動させるため、setIntervalをクリア
-                clearInterval(this);
-
-                // 1分後にアラームメッセージを消す
-                setTimeout(endAlarm, 60000);
-            }
-        }, 1000);
-    })
 });
+
+// 出る時間になったことをお知らせする
+$(function () {
+    // 出発時間（準備を開始する時間）を1度計算
+    const startTime = calculateStartTime(); // 出発時刻を取得
+    const current = updateTime(); // 現在時刻を取得
+
+    // アラームを1秒ごとにチェック
+    const alarmInterval = setInterval(function alarm() {
+        // 出発時間と現在時刻が一致するか確認
+        if (current.hour === startTime.getHours() && current.minute === startTime.getMinutes()) {
+            $("#alarm_text").text("準備を開始する時間になりました！");
+            console.log(`現在の時刻が${startTime.getHours()}時${startTime.getMinutes()}分になりました。`);
+            // アラームを1度だけ発動させるため、setIntervalをクリア
+            clearInterval(alarmInterval);
+            // 1分後にアラームメッセージを消す
+            setTimeout(endAlarm, 60000);
+        }
+    }, 1000);
+});
+
+// アラームメッセージを非表示にする関数
+function endAlarm() {
+console.log("1分経ったので表示が消えます。");
+$("#alarm_text").text("");
+};
 
 // 読込関数
 function load() {
@@ -106,10 +110,11 @@ function load() {
         // 表示用のHTMLを生成
         const html = `
             <li>
-                <p>No: ${data.key1}</p>
-                <p>タイトル: ${data.key2}</p>
-                <p>日時: ${data.key3}</p>
-                <p>時間: ${data.key4}時間 ${data.key5}分</p>
+                <p>①No: ${data.key1}</p>
+                <p>②タイトル: ${data.key2}</p>
+                <p>③集合時刻: ${data.key3}</p>
+                <p>④準備＆移動にかかる時間: ${data.key4}時間 ${data.key5}分</p>
+                <p>⑤準備を開始する時間: ${data.key6}</p>
             </li>
         `;
         $("#list").append(html);
@@ -120,15 +125,7 @@ function load() {
 $(document).ready(function () {
     load();
 });
-    
-// アラームメッセージを非表示にする関数
-function endAlarm() {
-    console.log("1分経ったので表示が消えます。");
-    $("#alarm_text").text("");
-    };
+
 
 // 1秒ごとに各機能を実行
 setInterval(updateTime, 1000);
- // 現在時刻の更新
-// setInterval(alarm, 1000);      /// アラームのチェック
-// setInterval(sale, 1000);       // セールのチェック
